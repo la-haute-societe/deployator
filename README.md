@@ -1,3 +1,8 @@
+# Deployator
+
+> The [ssh-deploy-release](https://github.com/la-haute-societe/ssh-deploy-release) command line interface
+
+
 ## Contributing
 
 ```
