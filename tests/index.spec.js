@@ -2,7 +2,7 @@ import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import extend from 'extend';
 
-import deployator from '../src/deployator';
+import Deployator from '../src/Deployator';
 import * as sinon from 'sinon';
 
 
@@ -36,7 +36,7 @@ describe('Index', function () {
     it('should not throw exception when configuration file exists', function () {
         assert.doesNotThrow(
             () => {
-                deployator(
+                new Deployator(
                     createRequiredOptions(),
                     createFakeDeployer()
                 )
@@ -47,7 +47,7 @@ describe('Index', function () {
     it('should throw exception when configuration file not exists', function () {
         assert.throw(
             () => {
-                deployator(
+                new Deployator(
                     extend(createRequiredOptions(), {
                         config: 'file/that/does/not/exist/at/all.js',
                     }),
@@ -60,7 +60,7 @@ describe('Index', function () {
     it('should throw exception when environment not exists', function () {
         assert.throw(
             () => {
-                deployator(
+                new Deployator(
                     extend(createRequiredOptions(), {
                         environment: 'weirdoEnvironmentName',
                     }),
@@ -70,7 +70,7 @@ describe('Index', function () {
         );
     });
 
-    it('should call deployRelease and not removeRelease ', function () {
+    it('should call deployRelease', function () {
 
         let stubs               = {
             deployRelease: () => {
@@ -80,18 +80,17 @@ describe('Index', function () {
         };
         let fakeDeployer        = createFakeDeployer(stubs);
         const stubDeployRelease = sinon.spy(stubs, 'deployRelease');
-        const stubRemoveRelease = sinon.spy(stubs, 'removeRelease');
 
-        deployator(
+        const deployator = new Deployator(
             createRequiredOptions(),
             fakeDeployer
         );
+        deployator.deploy();
 
         assert(stubDeployRelease.called);
-        assert(stubRemoveRelease.notCalled);
     });
 
-    it('should call removeRelease and not deployRelease', function () {
+    it('should call removeRelease', function () {
 
         let stubs               = {
             deployRelease: () => {
@@ -100,17 +99,16 @@ describe('Index', function () {
             }
         };
         let fakeDeployer        = createFakeDeployer(stubs);
-        const stubDeployRelease = sinon.spy(stubs, 'deployRelease');
         const stubRemoveRelease = sinon.spy(stubs, 'removeRelease');
 
-        deployator(
+        const deployator = new Deployator(
             extend(createRequiredOptions(), {
                 remove: true
             }),
             fakeDeployer
         );
+        deployator.remove();
 
-        assert(stubDeployRelease.notCalled);
         assert(stubRemoveRelease.called);
     });
 
@@ -120,7 +118,7 @@ describe('Index', function () {
         let fakeDeployer = createFakeDeployer();
         const spy        = sinon.spy(fakeDeployer);
 
-        deployator(
+        new Deployator(
             extend(createRequiredOptions(), {
                 debug: true
             }),
@@ -135,7 +133,7 @@ describe('Index', function () {
         let fakeDeployer = createFakeDeployer();
         const spy        = sinon.spy(fakeDeployer);
 
-        deployator(
+        new Deployator(
             extend(createRequiredOptions(), {
                 synchronize: true
             }),
@@ -150,7 +148,7 @@ describe('Index', function () {
         let fakeDeployer = createFakeDeployer();
         const spy        = sinon.spy(fakeDeployer);
 
-        deployator(
+        new Deployator(
             extend(createRequiredOptions(), {
                 environment: 'preproduction'
             }),

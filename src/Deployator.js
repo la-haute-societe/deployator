@@ -9,16 +9,16 @@ import fs from 'fs';
  * @param Deployer
  */
 export default function (argv, Deployer) {
-
     // Load config file
     const rawConfiguration = readConfigurationFile(argv.config, argv);
     const configuration    = mergeConfiguration(rawConfiguration, argv.environment);
+    console.log(configuration);
 
     if (argv.synchronize) {
         configuration.mode = 'synchronize';
     }
 
-// Show debug
+    // Show debug
     if (argv.debug) {
         configuration.debug = true;
     }
@@ -26,12 +26,10 @@ export default function (argv, Deployer) {
     // Deploy
     const deployer = new Deployer(configuration);
 
-    // Remove the release instead of deploying it
-    if (argv.remove) {
-        deployer.removeRelease();
-    }
-    else {
-        deployer.deployRelease();
+    // Return public API
+    return {
+        deploy: () => deployer.deployRelease(),
+        remove: () => deployer.removeRelease(),
     }
 }
 
