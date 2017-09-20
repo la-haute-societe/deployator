@@ -9,10 +9,15 @@ import fs from 'fs';
  * @param Deployer
  */
 export default function (argv, Deployer) {
+
+
+    if (!argv.config) {
+        argv.config = 'deployment-config.js';
+    }
+
     // Load config file
     const rawConfiguration = readConfigurationFile(argv.config, argv);
     const configuration    = mergeConfiguration(rawConfiguration, argv.environment);
-    console.log(configuration);
 
     if (argv.synchronize) {
         configuration.mode = 'synchronize';

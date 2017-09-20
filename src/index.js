@@ -3,6 +3,7 @@
 import Deployator from './Deployator';
 import Deployer from 'ssh-deploy-release';
 import yargs from 'yargs';
+import initializeConfiguration from './initialize-configuration';
 
 const argv = yargs
     .command({
@@ -14,11 +15,18 @@ const argv = yargs
         }
     })
     .command({
-        command: 'remove <--config> <--environment> [--debug]',
+        command: 'remove [--config] [--environment] [--debug]',
         desc: 'Deploy release to the remote server',
         handler: (argv) => {
             const deployator = new Deployator(argv, Deployer);
             deployator.remove();
+        }
+    })
+    .command({
+        command: 'init [--config]',
+        desc: 'Initialize configuration file',
+        handler: (argv) => {
+            initializeConfiguration(argv.config);
         }
     })
     .demandCommand()
@@ -43,8 +51,3 @@ const argv = yargs
     .help()
     .showHelpOnFail()
     .argv;
-
-
-
-
-
