@@ -4,84 +4,91 @@
 
 > The [ssh-deploy-release](https://github.com/la-haute-societe/ssh-deploy-release) command line interface.
 
+Example :
 
-## Install
+````
+/deployPath
+    |
+    ├── www --> symlink to ./releases/<currentRelease>
+    |
+    ├── releases
+    |   ├── 2017-02-08-17-14-21-867-UTC
+    |   ├── ...
+    |   └── 2017-02-09-18-01-10-765-UTC
+    |       ├── ...
+    |       └── logs --> symlink to shared/logs
+    |
+    ├── synchronized --> folder synchronized with rsync 
+    |
+    └── shared
+        └── logs                    
+````
+
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration file](#configuration-file)
+- [Custom parameters](#custom-parameters)
+- [Contributing](#contributing)
+
+
+
+
+## Installation
 
 ### Locally
-``` sh
-npm install -D deployator
-```
 
-You have to specify the path of the ``deployator`` binary inside the ``node_modules`` folder, example:
-``` sh
+````sh
+npm install -D deployator
+````
+
+You have to specify the path of the `deployator` binary inside the ``node_modules`` folder, example:
+````sh
 node_modules/.bin/deployator init ....
-```
+````
 or add ``deployator`` in the ``scripts`` section of your ``package.json``: 
-``` sh
+````sh
 scripts: {
     "deployator": "deployator"
 },
-```
+````
 
 Use the ``deployator`` like this:
-``` sh
+````sh
 npm run deployator -- init --config ...
-```
+````
 
 ### Globally
-``` sh
+````sh
 npm install -g deployator
-```
+````
 
 Use the ``deployator`` like this:
-``` sh
+````sh
 deployator init --config ...
-```
+````
 
 
 
 ## Usage
 
 ### Initialize configuration file
-``` sh
+````sh
 deployator init --config path/to/config.js
-```
+````
 
 ### Deploy release
-``` sh
+````sh
 deployator deploy --config path/to/config.js --environment review
-```
+````
 
 ### Remove release
 
 To use this command, the [``allowRemove`` option](https://github.com/la-haute-societe/ssh-deploy-release#optionsallowremove) must be enabled.
 
-``` sh
+````sh
 deployator remove --config path/to/config.js --environment review
-```
-
-### Custom options
-
-All options passed to `deployator` can be read with `options.get('optionName')`.
-
-Example: Deploy to different folder following the git branch 
-
-``` sh
-deployator deploy --config path/to/config.js --environment review --branch master
-```
-
-In the configuration file:
-``` js
-{
-    environments: {
-        review: {
-            ...
-            deployPath: '/path/to/review/' + options.get('branch'),
-            ...
-        },
-    }
-}
-```
+````
 
 
 ## Configuration file
@@ -89,7 +96,7 @@ In the configuration file:
 > See all the available options on the [ssh-deploy-release documentation](https://github.com/la-haute-societe/ssh-deploy-release).
 
 Example:
-``` js
+````js
 module.exports = function (options) {
 
     // @see https://www.npmjs.com/package/ssh-deploy-release
@@ -134,26 +141,51 @@ module.exports = function (options) {
         }
     }
 };
-```
+````
+
+
+## Custom parameters
+
+All parameters passed to `deployator` can be read with `options.get('optionName')`.
+
+Example: Deploy to different folder following the git branch 
+
+````sh
+deployator deploy --config ... --branch master
+````
+
+In the configuration file:
+````js
+{
+    environments: {
+        review: {
+            ...
+            deployPath: '/path/to/review/' + options.get('branch'),
+            ...
+        },
+    }
+}
+````
+
 
 
 
 ## Contributing
 
 ### Build
-``` sh
+````sh
 # Build (with Babel)
 npm run build
 
 # Build + watch (with Babel)
 npm run build -- --watch
-```
+````
 
 ### Unit tests
-``` sh
+````sh
 # Launch tests (Mocha + SinonJS)
 npm test
 
 # Launch tests + watch (Mocha + SinonJS)
 npm test -- --watch
-```
+````

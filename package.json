@@ -1,38 +1,39 @@
 {
-  "name": "deployator",
-  "version": "1.0.3",
-  "description": "",
-  "main": "index.js",
-  "bin": {
+  "name":            "deployator",
+  "version":         "1.0.12",
+  "description":     "Deploy releases over SSH with rsync, archive ZIP / TAR, symlinks, SCP",
+  "main":            "index.js",
+  "bin":             {
     "deployator": "dist/index.js"
   },
-  "scripts": {
-    "test": "mocha --compilers js:babel-core/register --require jsdom-global/register tests/**/*.spec.js",
-    "build": "node ./node_modules/babel-cli/bin/babel.js src --out-dir dist",
+  "scripts":         {
+    "test":        "mocha --compilers js:babel-core/register --require jsdom-global/register tests/**/*.spec.js",
+    "build":       "node ./node_modules/babel-cli/bin/babel.js src --out-dir dist",
     "postinstall": "json -I -f package.json -e 'this.foo=\"bar\"'",
-    "uninstall": "scripts/uninstall.js"
+    "uninstall":   "scripts/uninstall.js"
   },
-  "babel": {
+  "babel":           {
     "presets": [
       "es2015"
     ]
   },
-  "author": "",
-  "license": "ISC",
+  "author":          "La Haute Société (http://www.lahautesociete.com)",
+  "repository":      "la-haute-societe/deployator",
+  "license":         "MIT",
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.24.0",
+    "babel":               "^6.23.0",
+    "babel-cli":           "^6.24.0",
     "babel-preset-es2015": "^6.24.0",
-    "babel-register": "^6.24.0",
-    "chai": "^4.1.2",
-    "jsdom": "^9.12.0",
-    "jsdom-global": "^2.1.1",
-    "mocha": "^3.5.3",
-    "sinon": "^3.3.0"
+    "babel-register":      "^6.24.0",
+    "chai":                "^4.1.2",
+    "jsdom":               "^9.12.0",
+    "jsdom-global":        "^2.1.1",
+    "mocha":               "^3.5.3",
+    "sinon":               "^3.3.0"
   },
-  "dependencies": {
-    "extend": "^3.0.1",
+  "dependencies":    {
     "ssh-deploy-release": "^2.1.1",
-    "yargs": "^9.0.1"
+    "extend":             "^3.0.1",
+    "yargs":              "^9.0.1"
   }
 }
