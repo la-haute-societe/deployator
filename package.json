@@ -1,6 +1,6 @@
 {
   "name": "deployator",
-  "version": "0.0.4",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require jsdom-global/register tests/**/*.spec.js",
-    "build": "node ./node_modules/babel-cli/bin/babel.js src --out-dir dist"
+    "build": "node ./node_modules/babel-cli/bin/babel.js src --out-dir dist",
+    "postinstall": "json -I -f package.json -e 'this.foo=\"bar\"'",
+    "uninstall": "scripts/uninstall.js"
   },
   "babel": {
     "presets": [
