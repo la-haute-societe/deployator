@@ -1,6 +1,6 @@
 {
   "name":            "deployator",
-  "version":         "1.0.12",
+  "version":         "1.0.13",
   "description":     "Deploy releases over SSH with rsync, archive ZIP / TAR, symlinks, SCP",
   "main":            "index.js",
   "bin":             {
@@ -8,9 +8,7 @@
   },
   "scripts":         {
     "test":        "mocha --compilers js:babel-core/register --require jsdom-global/register tests/**/*.spec.js",
-    "build":       "node ./node_modules/babel-cli/bin/babel.js src --out-dir dist",
-    "postinstall": "json -I -f package.json -e 'this.foo=\"bar\"'",
-    "uninstall":   "scripts/uninstall.js"
+    "build":       "node ./node_modules/babel-cli/bin/babel.js src --out-dir dist"
   },
   "babel":           {
     "presets": [
