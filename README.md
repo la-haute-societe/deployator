@@ -72,6 +72,8 @@ deployator init --config ...
 
 ## Usage
 
+> In the following examples, let's assume that you installed deployator globally. If you installed it locally, you'll need to adjust the path. See [above](#locally)
+
 ### Initialize configuration file
 ````sh
 deployator init --config path/to/config.js
