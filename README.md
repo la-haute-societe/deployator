@@ -4,12 +4,13 @@
 
 > The [ssh-deploy-release](https://github.com/la-haute-societe/ssh-deploy-release) command line interface.
 
-Example :
+
+Example of directory tree after deployment on your server :
 
 ````
 /deployPath
     |
-    ├── www --> symlink to ./releases/<currentRelease>
+    ├── www --> symlink to ./releases/<currentRelease>  -- It's the webroot
     |
     ├── releases
     |   ├── 2017-02-08-17-14-21-867-UTC
@@ -35,6 +36,9 @@ Example :
 
 
 ## Installation
+
+According to the installation method, __locally__ or __globally__, the path to the 
+``deployator`` will be different:
 
 ### Locally
 
@@ -75,11 +79,30 @@ deployator init --config ...
 > In the following examples, let's assume that you installed deployator globally. If you installed it locally, you'll need to adjust the path. See [above](#locally)
 
 ### Initialize configuration file
+
+This command will create a new configuration file in the current folder.
+
 ````sh
-deployator init --config path/to/config.js
+deployator init
+````
+
+By default, the file will be named ``deployment-config.js`` but it is possible to change it with the parameter ``config``
+
+````sh
+deployator init --config path/to/another-config-file-name.js
 ````
 
 ### Deploy release
+
+This command will deploy a new release using the configuration contained in  ``deployment-config.js`` file.
+You must specify the parameter ``environment`` to indicate on which environment the release should be deployed.
+
+````sh
+deployator deploy --environment review
+````
+
+You could specify another confguration file with the ``config`` parameter.
+
 ````sh
 deployator deploy --config path/to/config.js --environment review
 ````
@@ -89,8 +112,10 @@ deployator deploy --config path/to/config.js --environment review
 To use this command, the [``allowRemove`` option](https://github.com/la-haute-societe/ssh-deploy-release#optionsallowremove) must be enabled.
 
 ````sh
-deployator remove --config path/to/config.js --environment review
+deployator remove --environment review
 ````
+
+Again, you could specify another confguration file with the ``config`` parameter, like with the ``deploy`` command.
 
 
 ## Configuration file
