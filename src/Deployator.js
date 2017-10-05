@@ -39,6 +39,20 @@ export default function (argv, Deployer) {
 }
 
 /**
+ * Return absolute filePath
+ * if filePath is not an absolute path, will preprend with process.cwd
+ * @param filePath
+ * @return {string|*}
+ */
+function getAbsoluteFilePath(filePath) {
+    if (path.isAbsolute(filePath)) {
+        return filePath;
+    }
+
+    return path.join(process.cwd(), filePath);
+}
+
+/**
  * Read configuration file
  * @param filePath
  * @param argv
@@ -46,7 +60,7 @@ export default function (argv, Deployer) {
  */
 function readConfigurationFile(filePath, argv) {
 
-    const absoluteFilePath = path.join(process.cwd(), filePath);
+    const absoluteFilePath = getAbsoluteFilePath(filePath);
 
     if (!fs.existsSync(absoluteFilePath)) {
         throw 'Configuration file not found "' + absoluteFilePath + '"';

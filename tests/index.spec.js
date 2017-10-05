@@ -1,6 +1,7 @@
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import extend from 'extend';
+import path from 'path';
 
 import Deployator from '../src/Deployator';
 import * as sinon from 'sinon';
@@ -50,6 +51,32 @@ describe('Index', function () {
                 new Deployator(
                     extend(createRequiredOptions(), {
                         config: 'file/that/does/not/exist/at/all.js',
+                    }),
+                    createFakeDeployer()
+                )
+            }
+        );
+    });
+
+    it('should not throw exception when configuration file path is absolute and exists', function () {
+        assert.doesNotThrow(
+            () => {
+                new Deployator(
+                    extend(createRequiredOptions(), {
+                        config: path.join(path.dirname(__filename), 'config.js'),
+                    }),
+                    createFakeDeployer()
+                )
+            }
+        );
+    });
+
+    it('should throw exception when configuration file path is absolute and not exists', function () {
+        assert.throw(
+            () => {
+                new Deployator(
+                    extend(createRequiredOptions(), {
+                        config: path.join(path.dirname(__filename), 'file/that/does/not/exist/at/all.js'),
                     }),
                     createFakeDeployer()
                 )
