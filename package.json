@@ -27,11 +27,12 @@
     "jsdom": "^9.12.0",
     "jsdom-global": "^2.1.1",
     "mocha": "^3.5.3",
-    "sinon": "^3.3.0"
+    "sinon": "^3.3.0",
+    "tmp": "0.0.33"
   },
   "dependencies": {
-    "ssh-deploy-release": "^2.1.1",
     "extend": "^3.0.1",
+    "ssh-deploy-release": "^2.1.5",
     "yargs": "^9.0.1"
   }
 }
