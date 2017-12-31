@@ -62,4 +62,24 @@ describe('Initialize configuration', function () {
         // Clean up
         fs.unlinkSync(absoluteFilePath);
     });
+
+
+    it ('should not overwrite an existing configuration file', function () {
+        const relativeFilePath = '__test__deployator-configuration.js';
+
+        // Create a stub to monitor calls to console.info. Using a stub instead of a spy ensures nothing is written to stdout.
+        const consoleWarnStub = sinon.stub(console, 'warn');
+
+        // Create a dummy configuration file to ensure next step fails
+        fs.writeFileSync(relativeFilePath, 'module.exports = {};');
+
+        // Do the job
+        initializeConfiguration(relativeFilePath);
+
+        // Check if the job was done correctly
+        assert.isTrue(consoleWarnStub.calledWith(`File "${relativeFilePath}" exists. Aborting.`),);
+
+        // Clean up
+        fs.unlinkSync(relativeFilePath);
+    });
 });
