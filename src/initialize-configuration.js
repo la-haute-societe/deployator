@@ -12,4 +12,5 @@ export default function (filePath) {
     const templateFilePath = path.resolve(__dirname, 'templates/deployator-config.js');
 
     fs.createReadStream(templateFilePath).pipe(fs.createWriteStream(absoluteFilePath));
+    console.info('✨  Created a boilerplate configuration file at ' + absoluteFilePath);
 }
