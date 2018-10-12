@@ -78,13 +78,17 @@ deployator init --config ...
 
 > In the following examples, let's assume that you installed deployator globally. If you installed it locally, you'll need to adjust the path. See [above](#locally)
 
+
 ### Initialize configuration file
 
-This command will create a new configuration file in the current folder.
-
 ````sh
-deployator init
+  deployator init [--config]
+
+Options:
+  --config, -c       Path of configuration file
 ````
+
+This command will create a new configuration file in the current folder.
 
 By default, the file will be named ``deployment-config.js`` but it is possible to change it with the parameter ``config``
 
@@ -93,6 +97,17 @@ deployator init --config path/to/another-config-file-name.js
 ````
 
 ### Deploy release
+
+
+````sh
+  deployator deploy [--config] [--environment] [--debug] [--synchronize]
+  
+Options:
+  --config, -c       Path of configuration file
+  --environment, -e  Environment name (example: review, preproduction)
+  --debug, -d        Enable debug mode
+  --synchronize, -s  Enable synchronize mode
+````
 
 This command will deploy a new release using the configuration contained in  ``deployment-config.js`` file.
 You must specify the parameter ``environment`` to indicate on which environment the release should be deployed.
@@ -108,6 +123,16 @@ deployator deploy --config path/to/config.js --environment review
 ````
 
 ### Remove release
+
+
+````sh
+  deployator remove [--config] [--environment] [--debug]
+
+Options:
+  --config, -c       Path of configuration file
+  --environment, -e  Environment name (example: review, preproduction)
+  --debug, -d        Enable debug mode
+````
 
 To use this command, the [``allowRemove`` option](https://github.com/la-haute-societe/ssh-deploy-release#optionsallowremove) must be enabled.
 
