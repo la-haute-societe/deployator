@@ -23,6 +23,14 @@ const argv = yargs
         }
     })
     .command({
+        command: 'rollback',
+        desc: 'Rollback to the previous release',
+        handler: (argv) => {
+          const deployator = new Deployator(argv, Deployer);
+          deployator.rollback();
+        }
+    })
+    .command({
         command: 'init [--config]',
         desc: 'Initialize configuration file',
         handler: (argv) => {

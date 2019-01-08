@@ -9,8 +9,6 @@ import fs from 'fs';
  * @param Deployer
  */
 export default function (argv, Deployer) {
-
-
     if (!argv.config) {
         argv.config = 'deployment-config.js';
     }
@@ -33,14 +31,15 @@ export default function (argv, Deployer) {
 
     // Return public API
     return {
-        deploy: () => deployer.deployRelease(),
-        remove: () => deployer.removeRelease(),
+        deploy:   () => deployer.deployRelease(),
+        remove:   () => deployer.removeRelease(),
+        rollback: () => deployer.rollbackToPreviousRelease(),
     }
 }
 
 /**
  * Return absolute filePath
- * if filePath is not an absolute path, will preprend with process.cwd
+ * if filePath is not an absolute path, will prepend with process.cwd
  * @param filePath
  * @return {string|*}
  */
