@@ -24,11 +24,13 @@ describe('Index', function () {
                 deployRelease: () => {
                 },
                 removeRelease: () => {
+                },
+                rollbackToPreviousRelease: () => {
                 }
             };
         }
 
-        return configuration => {
+        return function (configuration) {
             return stubs;
         };
     }
@@ -103,6 +105,8 @@ describe('Index', function () {
             deployRelease: () => {
             },
             removeRelease: () => {
+            },
+            rollbackToPreviousRelease: () => {
             }
         };
         let fakeDeployer        = createFakeDeployer(stubs);
@@ -123,6 +127,8 @@ describe('Index', function () {
             deployRelease: () => {
             },
             removeRelease: () => {
+            },
+            rollbackToPreviousRelease: () => {
             }
         };
         let fakeDeployer        = createFakeDeployer(stubs);
@@ -137,6 +143,30 @@ describe('Index', function () {
         deployator.remove();
 
         assert(stubRemoveRelease.called);
+    });
+
+    it('should call rollbackToPreviousRelease', function () {
+
+        let stubs               = {
+            deployRelease: () => {
+            },
+            removeRelease: () => {
+            },
+            rollbackToPreviousRelease: () => {
+            }
+        };
+        let fakeDeployer        = createFakeDeployer(stubs);
+        const stubRollbackToPreviousRelease = sinon.spy(stubs, 'rollbackToPreviousRelease');
+
+        const deployator = new Deployator(
+            extend(createRequiredOptions(), {
+                remove: true
+            }),
+            fakeDeployer
+        );
+        deployator.rollback();
+
+        assert(stubRollbackToPreviousRelease.called);
     });
 
 

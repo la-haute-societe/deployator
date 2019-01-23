@@ -122,8 +122,8 @@ You could specify another confguration file with the ``config`` parameter.
 deployator deploy --config path/to/config.js --environment review
 ````
 
-### Remove release
 
+### Remove release
 
 ````sh
   deployator remove [--config] [--environment] [--debug]
@@ -141,6 +141,27 @@ deployator remove --environment review
 ````
 
 Again, you could specify another confguration file with the ``config`` parameter, like with the ``deploy`` command.
+
+### Rollback to previous release
+
+````sh
+  deployator rollback [--config] [--environment] [--debug]
+
+Options:
+  --config, -c       Path of configuration file
+  --environment, -e  Environment name (example: review, preproduction)
+  --debug, -d        Enable debug mode
+````
+
+This command will rollback to the previous release on the specified environment.
+
+The previous release will be renamed before updating the symlink of the current version, for example 2019-01-09-10-53-35-265-UTC will become 2019-01-09-13-46-45-457-UTC_rollback-to_2019-01-09-10-53-35-265-UTC.
+
+If this command is called several times, the current version will switch between the last two releases. current date + "_rollbackTo_" will be prepended to the release name on each call of this command so be careful not to exceed the size limit of the folder name.
+
+````sh
+deployator rollback --environment review
+````
 
 
 ## Configuration file

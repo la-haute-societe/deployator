@@ -12,6 +12,9 @@ describe('Initialize configuration', function () {
         if (console.info.restore) {
             console.info.restore();
         }
+        if (console.warn.restore) {
+            console.warn.restore();
+        }
     });
 
     it ('should create the configuration file when given a relative file path', function () {
@@ -42,9 +45,6 @@ describe('Initialize configuration', function () {
     it ('should create the configuration file when given an absolute file path', function () {
         const absoluteFilePath = tmp.tmpNameSync();
 
-        // Create a stub to monitor calls to console.info. Using a stub instead of a spy ensures nothing is written to stdout.
-        const consoleInfoStub = sinon.stub(console, 'info');
-
         // Do the job
         initializeConfiguration(absoluteFilePath);
 
@@ -52,11 +52,6 @@ describe('Initialize configuration', function () {
         assert.isTrue(
             fs.existsSync(absoluteFilePath),
             `A new deployator configuration file should have been written to "${absoluteFilePath}"`
-        );
-        assert.isTrue(consoleInfoStub.called, 'console.info() should have been called');
-        assert.isTrue(
-            consoleInfoStub.calledWith(`✨  Created a boilerplate configuration file at ${absoluteFilePath}`),
-            `console.info should have been called with "✨  Created a boilerplate configuration file at ${absoluteFilePath}"`
         );
 
         // Clean up
