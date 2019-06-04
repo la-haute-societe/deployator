@@ -3,7 +3,7 @@ import { assert } from 'chai';
 import extend from 'extend';
 import path from 'path';
 
-import Deployator from '../src/Deployator';
+import Deployator, { listEnvironments } from '../src/Deployator';
 import * as sinon from 'sinon';
 
 
@@ -215,11 +215,23 @@ describe('Index', function () {
         let expectedConfiguration = {
             localPath: 'www',
             share: {},
-            deployPath: '/opt/bitnami/apache2/htdocs/maxime/deployator/'
+            deployPath: '/opt/bitnami/apache2/htdocs/maxime/deployator/',
+            host: 'preprod.example.com',
+            username: 'user',
         };
         assert.deepEqual(spy.getCall(0).args[0], expectedConfiguration);
     });
 
+    it('should display a list of environments defined in the configuration file', function () {
+
+        const argv = { config: path.join(path.dirname(__filename), 'config.js') };
+        const spy = sinon.spy(console, 'log');
+
+        listEnvironments(argv);
+
+        assert.equal(spy.getCall(0).args[0], 'Available environments:');
+        assert.equal(spy.getCall(1).args[0], 'review        \u001b[32mroot\u001b[39m@\u001b[33mexample.test\u001b[39m:\u001b[31m/opt/bitnami/apache2/htdocs/maxime/deployator/undefined\u001b[39m\npreproduction \u001b[32muser\u001b[39m@\u001b[33mpreprod.example.com\u001b[39m:\u001b[31m/opt/bitnami/apache2/htdocs/maxime/deployator/\u001b[39m  ');
+    });
 })
 ;
 

@@ -3,6 +3,7 @@ module.exports = function (options) {
     return {
 
         common: {
+            username: 'root',
             localPath: 'www',
             share: {
                 'endpoint-assets': 'endpoint/assets'
@@ -11,8 +12,8 @@ module.exports = function (options) {
 
 
         environments: {
-
             review: {
+                host: 'example.test',
                 deployPath: '/opt/bitnami/apache2/htdocs/maxime/deployator/' + options.get('branch'),
                 allowRemove: true,
                 onAfterDeployExecute: (context) => {
@@ -24,6 +25,8 @@ module.exports = function (options) {
             },
 
             preproduction: {
+                host: 'preprod.example.com',
+                username: 'user',
                 deployPath: '/opt/bitnami/apache2/htdocs/maxime/deployator/',
                 share: {},
             }
