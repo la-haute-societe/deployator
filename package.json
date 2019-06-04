@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha --require @babel/register tests/**/*.spec.js",
-    "build": "yarn babel src --out-dir dist"
+    "build": "babel src --out-dir dist"
   },
   "babel": {
     "presets": [
@@ -39,6 +39,8 @@
     "tmp": "0.0.33"
   },
   "dependencies": {
+    "chalk": "^2.4.2",
+    "columnify": "^1.5.4",
     "extend": "^3.0.1",
     "ssh-deploy-release": ">=2.3.4",
     "yargs": "^10.0.3"
