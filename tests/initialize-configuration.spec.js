@@ -2,6 +2,7 @@ import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import fs from 'fs';
 import tmp from 'tmp';
+import rimraf from 'rimraf';
 
 import initializeConfiguration from '../src/initialize-configuration';
 import * as sinon from 'sinon';
@@ -56,6 +57,24 @@ describe('Initialize configuration', function () {
 
         // Clean up
         fs.unlinkSync(absoluteFilePath);
+    });
+
+
+    it ('should create the configuration file create non-existing configuration file parent directories', function () {
+        const baseDirectory = tmp.tmpNameSync({ unsafeCleanup: true });
+        const absoluteFilePath = `${baseDirectory}/long/path/that/is/unlikely/to/exist/__test__deployator-configuration.js`;
+
+        // Do the job
+        initializeConfiguration(absoluteFilePath);
+
+        // Check if the job was done correctly
+        assert.isTrue(
+            fs.existsSync(absoluteFilePath),
+            `A new deployator configuration file should have been written to "${absoluteFilePath}"`
+        );
+
+        // Clean up
+        rimraf.sync(baseDirectory);
     });
 
 

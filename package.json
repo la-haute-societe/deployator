@@ -26,17 +26,18 @@
   "repository": "la-haute-societe/deployator",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/node": "^7.2.2",
+    "@babel/cli":        "^7.2.3",
+    "@babel/core":       "^7.2.2",
+    "@babel/node":       "^7.2.2",
     "@babel/preset-env": "^7.3.1",
-    "@babel/register": "^7.0.0",
-    "jsdom": "^9.12.0",
-    "jsdom-global": "^2.1.1",
-    "mocha": "^5.2.0",
-    "sinon": "^7.2.3",
-    "chai": "^4.1.2",
-    "tmp": "0.0.33"
+    "@babel/register":   "^7.0.0",
+    "jsdom":             "^9.12.0",
+    "jsdom-global":      "^2.1.1",
+    "mocha":             "^5.2.0",
+    "sinon":             "^7.2.3",
+    "chai":              "^4.1.2",
+    "tmp":               "^0.1.0",
+    "rimraf":            "latest"
   },
   "dependencies": {
     "chalk": "^2.4.2",
