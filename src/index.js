@@ -7,7 +7,7 @@ import initializeConfiguration from './initialize-configuration';
 
 const argv = yargs
     .command({
-        command: 'list',
+        command: 'list [--config]',
         desc: 'List available environments',
         handler: (argv) => {
           listEnvironments(argv);
@@ -30,7 +30,7 @@ const argv = yargs
         }
     })
     .command({
-        command: 'rollback',
+        command: 'rollback [--config] [--environment] [--debug]',
         desc: 'Rollback to the previous release',
         handler: (argv) => {
           const deployator = new Deployator(argv, Deployer);

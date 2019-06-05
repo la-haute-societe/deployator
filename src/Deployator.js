@@ -94,6 +94,10 @@ function mergeConfiguration(rawConfiguration, environment) {
 }
 
 export function listEnvironments(argv) {
+    if (!argv.config) {
+        argv.config = 'deployment-config.js';
+    }
+
     const rawConfiguration = readConfigurationFile(argv.config, argv);
     const environmentDescriptions = {};
 
