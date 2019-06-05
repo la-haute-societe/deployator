@@ -1,11 +1,18 @@
 #!/usr/bin/env node
 
-import Deployator from './Deployator';
+import Deployator, { listEnvironments } from './Deployator';
 import Deployer from 'ssh-deploy-release';
 import yargs from 'yargs';
 import initializeConfiguration from './initialize-configuration';
 
 const argv = yargs
+    .command({
+        command: 'list [--config]',
+        desc: 'List available environments',
+        handler: (argv) => {
+          listEnvironments(argv);
+        }
+    })
     .command({
         command: 'deploy [--config] [--environment] [--debug] [--synchronize]',
         desc: 'Deploy release to the remote server',
@@ -23,7 +30,7 @@ const argv = yargs
         }
     })
     .command({
-        command: 'rollback',
+        command: 'rollback [--config] [--environment] [--debug]',
         desc: 'Rollback to the previous release',
         handler: (argv) => {
           const deployator = new Deployator(argv, Deployer);

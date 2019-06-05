@@ -142,6 +142,7 @@ deployator remove --environment review
 
 Again, you could specify another confguration file with the ``config`` parameter, like with the ``deploy`` command.
 
+
 ### Rollback to previous release
 
 ````sh
@@ -162,6 +163,18 @@ If this command is called several times, the current version will switch between
 ````sh
 deployator rollback --environment review
 ````
+
+
+### List available environments
+
+````sh
+  deployator list [--config]
+
+Options:
+  --config, -c       Path of configuration file
+````
+
+This command displays the list of environments available in the configuration file.
 
 
 ## Configuration file

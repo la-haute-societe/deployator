@@ -1,7 +1,9 @@
-import extend from 'extend';
-import process from 'process';
-import path from 'path';
-import fs from 'fs';
+import extend         from 'extend';
+import process        from 'process';
+import path           from 'path';
+import fs             from 'fs';
+import chalk          from 'chalk';
+import columnify      from 'columnify';
 
 
 /**
@@ -89,4 +91,35 @@ function mergeConfiguration(rawConfiguration, environment) {
     }
 
     return extend({}, rawConfiguration.common, rawConfiguration.environments[environment]);
+}
+
+export function listEnvironments(argv) {
+    if (!argv.config) {
+        argv.config = 'deployment-config.js';
+    }
+
+    const rawConfiguration = readConfigurationFile(argv.config, argv);
+    const environmentDescriptions = {};
+
+    for (const environmentName of Object.keys(rawConfiguration.environments)) {
+        const configuration = mergeConfiguration(rawConfiguration, environmentName);
+        const username = chalk.green(configuration.username);
+        const host = chalk.yellow(configuration.host);
+        const path = chalk.red(configuration.deployPath);
+
+        environmentDescriptions[environmentName] = `${username}@${host}:${path}`;
+    }
+
+    if (Object.keys(environmentDescriptions).length === 0) {
+        const configurationFilename = argv.config;
+        console.log('There are no environments defined in the configuration file.');
+        console.log(chalk`You can add some by editing the {yellow ${configurationFilename}} file.`);
+
+        return;
+    }
+
+    console.log('Available environments:');
+    console.log(columnify(environmentDescriptions, {
+        showHeaders: false,
+    }));
 }
