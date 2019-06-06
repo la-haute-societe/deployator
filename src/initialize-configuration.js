@@ -8,10 +8,19 @@ export default function (newConfigurationFilePath) {
 
     if (fs.existsSync(newConfigurationFilePath)) {
         console.warn(`File "${newConfigurationFilePath}" exists. Aborting.`);
-    } else {
-        const templateFilePath = path.resolve(__dirname, 'templates/deployator-config.js');
+        return;
+    }
 
-        fs.createReadStream(templateFilePath).pipe(fs.createWriteStream(newConfigurationFilePath));
-        console.info('✨  Created a boilerplate configuration file at ' + newConfigurationFilePath);
+    ensureDirectoryExists(path.dirname(newConfigurationFilePath));
+
+    const templateFilePath = path.resolve(__dirname, 'templates/deployator-config.js');
+
+    fs.createReadStream(templateFilePath).pipe(fs.createWriteStream(newConfigurationFilePath));
+    console.info('✨  Created a boilerplate configuration file at ' + newConfigurationFilePath);
+}
+
+function ensureDirectoryExists (directory) {
+    if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory, { recursive: true });
     }
 }
