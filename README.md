@@ -1,6 +1,6 @@
 # Deployator
 
-[![NPM version](https://badge.fury.io/js/deployator.svg)](https://badge.fury.io/js/deployator)
+[![NPM version](https://badge.fury.io/js/deployator.svg)](https://badge.fury.io/js/deployator)&nbsp;![](https://img.shields.io/npm/dm/deployator.svg)
 
 > Deploy releases over SSH with rsync, archive ZIP / TAR, symlinks, SCP ...
 
