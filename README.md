@@ -1,5 +1,7 @@
 # Deployator
 
+[![NPM version](https://badge.fury.io/js/deployator.svg)](https://badge.fury.io/js/deployator)
+
 > Deploy releases over SSH with rsync, archive ZIP / TAR, symlinks, SCP ...
 
 > The [ssh-deploy-release](https://github.com/la-haute-societe/ssh-deploy-release) command line interface.
