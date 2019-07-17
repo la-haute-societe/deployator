@@ -26,24 +26,25 @@
   "repository": "la-haute-societe/deployator",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli":        "^7.2.3",
-    "@babel/core":       "^7.2.2",
-    "@babel/node":       "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/register":   "^7.0.0",
-    "jsdom":             "^9.12.0",
-    "jsdom-global":      "^2.1.1",
-    "mocha":             "^5.2.0",
-    "sinon":             "^7.2.3",
-    "chai":              "^4.1.2",
-    "tmp":               "^0.1.0",
-    "rimraf":            "latest"
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/node": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/register": "^7.4.4",
+    "jsdom": "^15.1.1",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^6.1.4",
+    "sinon": "^7.3.2",
+    "chai": "^4.2.0",
+    "tmp": "^0.1.0",
+    "rimraf": "latest"
   },
   "dependencies": {
     "chalk": "^2.4.2",
     "columnify": "^1.5.4",
-    "extend": "^3.0.1",
-    "ssh-deploy-release": ">=2.3.4",
-    "yargs": "^10.0.3"
+    "extend": "^3.0.2",
+    "npm-check-updates": "^3.1.20",
+    "ssh-deploy-release": ">=3.0.0-beta.1",
+    "yargs": "^13.3.0"
   }
 }
