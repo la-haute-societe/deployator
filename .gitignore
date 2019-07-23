@@ -1,3 +1,8 @@
-.idea
-node_modules
-dist
+# IDE
+/.idea
+
+# NPM
+/node_modules
+
+# Transpiled files
+/dist
