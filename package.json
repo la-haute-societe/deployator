@@ -7,6 +7,7 @@
     "deployator": "dist/index.js"
   },
   "scripts": {
+    "prepare": "npm run build",
     "test": "mocha --require @babel/register tests/**/*.spec.js",
     "build": "babel src --out-dir dist"
   },
