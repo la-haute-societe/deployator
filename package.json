@@ -1,6 +1,6 @@
 {
   "name": "deployator",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "Deploy releases over SSH with rsync, archive ZIP / TAR, symlinks, SCP",
   "main": "index.js",
   "bin": {
@@ -45,7 +45,7 @@
     "columnify": "^1.5.4",
     "extend": "^3.0.2",
     "npm-check-updates": "^3.1.20",
-    "ssh-deploy-release": ">=3.0.0-beta.2",
+    "ssh-deploy-release": ">=3.0.0-beta.3",
     "yargs": "^13.3.0"
   }
 }
