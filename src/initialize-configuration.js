@@ -14,8 +14,7 @@ export default function (newConfigurationFilePath) {
     ensureDirectoryExists(path.dirname(newConfigurationFilePath));
 
     const templateFilePath = path.resolve(__dirname, 'templates/deployator-config.js');
-
-    fs.createReadStream(templateFilePath).pipe(fs.createWriteStream(newConfigurationFilePath));
+    fs.copyFileSync(path.resolve(__dirname, 'templates/deployator-config.js'), newConfigurationFilePath);
     console.info('✨  Created a boilerplate configuration file at ' + newConfigurationFilePath);
 }
 

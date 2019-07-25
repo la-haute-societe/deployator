@@ -60,7 +60,7 @@ describe('Initialize configuration', function () {
     });
 
 
-    it ('should create the configuration file create non-existing configuration file parent directories', function () {
+    it ('should create non-existing configuration file parent directories', function () {
         const baseDirectory = tmp.tmpNameSync({ unsafeCleanup: true });
         const absoluteFilePath = `${baseDirectory}/long/path/that/is/unlikely/to/exist/__test__deployator-configuration.js`;
 
