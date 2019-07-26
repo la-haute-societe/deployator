@@ -2,6 +2,7 @@ import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import extend from 'extend';
 import path from 'path';
+import supportsColor from 'supports-color';
 
 import Deployator, { listEnvironments } from '../src/Deployator';
 import * as sinon from 'sinon';
@@ -230,7 +231,12 @@ describe('Index', function () {
         listEnvironments(argv);
 
         assert.equal(spy.getCall(0).args[0], 'Available environments:');
-        assert.equal(spy.getCall(1).args[0], 'review        \u001b[32mroot\u001b[39m@\u001b[33mexample.test\u001b[39m:\u001b[31m/opt/bitnami/apache2/htdocs/maxime/deployator/undefined\u001b[39m\npreproduction \u001b[32muser\u001b[39m@\u001b[33mpreprod.example.com\u001b[39m:\u001b[31m/opt/bitnami/apache2/htdocs/maxime/deployator/\u001b[39m  ');
+
+        if (supportsColor.stdout) {
+            assert.equal(spy.getCall(1).args[0], 'review        \u001b[32mroot\u001b[39m@\u001b[33mexample.test\u001b[39m:\u001b[31m/opt/bitnami/apache2/htdocs/maxime/deployator/undefined\u001b[39m\npreproduction \u001b[32muser\u001b[39m@\u001b[33mpreprod.example.com\u001b[39m:\u001b[31m/opt/bitnami/apache2/htdocs/maxime/deployator/\u001b[39m  ');
+        } else {
+            assert.equal(spy.getCall(1).args[0], 'review        root@example.test:/opt/bitnami/apache2/htdocs/maxime/deployator/undefined\npreproduction user@preprod.example.com:/opt/bitnami/apache2/htdocs/maxime/deployator/  ');
+        }
     });
 })
 ;
