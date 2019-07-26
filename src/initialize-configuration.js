@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import mkdir from 'make-dir';
 
 export default function (newConfigurationFilePath) {
     if (!newConfigurationFilePath) {
@@ -20,6 +21,6 @@ export default function (newConfigurationFilePath) {
 
 function ensureDirectoryExists (directory) {
     if (!fs.existsSync(directory)) {
-        fs.mkdirSync(directory, { recursive: true });
+        mkdir.sync(directory);
     }
 }
