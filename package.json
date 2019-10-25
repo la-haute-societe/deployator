@@ -13,6 +13,11 @@
   "bin": {
     "deployator": "dist/index.js"
   },
+  "scripts": {
+    "prepare": "npm run build",
+    "test": "mocha --require @babel/register tests/**/*.spec.js",
+    "build": "babel src --out-dir dist && chmod +x dist/index.js"
+  },
   "babel": {
     "presets": [
       [
@@ -47,10 +52,5 @@
     "make-dir": "^3.0.0",
     "ssh-deploy-release": ">=3.0.0-beta.3",
     "yargs": "^13.3.0"
-  },
-  "scripts": {
-    "prepare": "npm run build",
-    "test": "mocha --require @babel/register tests/**/*.spec.js",
-    "build": "babel src --out-dir dist"
   }
 }
