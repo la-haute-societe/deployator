@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-beta.3",
+  "version": "3.0.0",
   "name": "deployator",
   "description": "Deploy releases over SSH with rsync, archive ZIP / TAR, symlinks, SCP",
   "author": {
